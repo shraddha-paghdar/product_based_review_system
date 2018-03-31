@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title></title>
+    <!-- Bootstrap Core CSS -->
+    <link href="../static/css1/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../static/font-awesome-4.7.0/css/font-awesome.min.css">                <!-- Font Awesome -->
+    <link href="../static/css1/lib/owl.carousel.min.css" rel="stylesheet" />
+    <link href="../static/css1/lib/owl.theme.default.min.css" rel="stylesheet" />
+    <link href="../static/css1/helper.css" rel="stylesheet">
+    <link href="../static/css1/style.css" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+   <style>
+        #chartdiv {
+          width: 100%;
+          height: 500px;
+          margin: auto;
+        }
+    </style>
+    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="https://www.amcharts.com/lib/3/gauge.js"></script>
+    <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+    <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+    <script>
+        var gaugeChart = AmCharts.makeChart("chartdiv", {
+          "type": "gauge",
+          "theme": "light",
+          "axes": [{
+            "axisAlpha": 0,
+            "tickAlpha": 0,
+            "labelsEnabled": false,
+            "startValue": 0,
+            "endValue": 100,
+            "startAngle": 0,
+            "endAngle": 270,
+            "bands": [ {
+              "color": "#eee",
+              "startValue": 0,
+              "endValue": 100,
+              "radius": "80%",
+              "innerRadius": "65%"
+            }, {
+              "color": "#fdd400",
+              "startValue": 0,
+              "endValue": "{{ avg*2*10 }}",
+              "radius": "80%",
+              "innerRadius": "65%",
+              "balloonText": "{{ avg*2*10 }}%"
+            }, {
+              "color": "#eee",
+              "startValue": 0,
+              "endValue": 100,
+              "radius": "60%",
+              "innerRadius": "45%"
+            }, {
+              "color": "#67b7dc",
+              "startValue": 0,
+              "endValue": "{{ pos*100/(pos + neg) }}",
+              "radius": "60%",
+              "innerRadius": "45%",
+              "balloonText": "{{ pos*100/(pos + neg) }}%"
+            }, {
+              "color": "#eee",
+              "startValue": 0,
+              "endValue": 100,
+              "radius": "40%",
+              "innerRadius": "25%"
+            }, {
+              "color": "#cc4748",
+              "startValue": 0,
+              "endValue": "{{ neg*100/(pos + neg) }}",
+              "radius": "40%",
+              "innerRadius": "25%",
+              "balloonText": "{{ neg*100/(pos + neg) }}%"
+            }]
+          }],
+          "allLabels": [{
+            "text": "Overall",
+            "x": "49%",
+            "y": "15%",
+            "size": 15,
+            "bold": true,
+            "color": "#fdd400",
+            "align": "right"
+          }, {
+            "text": "Positive",
+            "x": "49%",
+            "y": "24%",
+            "size": 15,
+            "bold": true,
+            "color":  "#67b7dc",
+            "align": "right"
+          }, {
+            "text": "Negative",
+            "x": "49%",
+            "y": "33%",
+            "size": 15,
+            "bold": true,
+            "color": "#cc4748",
+            "align": "right"
+          }],
+          "export": {
+            "enabled": true
+          }
+        });
+    </script>
+</head>
+
+<body class="fix-header fix-sidebar">
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+			<circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
+    </div>
+    <!-- Main wrapper  -->
+    <div id="main-wrapper">
+        <!-- Page wrapper  -->
+        <div class="page-wrapper" style="min-height: 359px;margin-left: 0px;">
+            <div class="row page-titles" style="background: #0c0101;">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-danger">PRODUCT REVIEW ANALYSIS</h3> </div>
+            </div>
+            <div class="container-fluid">
+                <!-- Start Page Content -->
+                 <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card bg-dark">
+                            <div class="testimonial-widget-one p-17">
+                                <div class="testimonial-widget-one owl-carousel owl-theme">
+                                    <div class="item">
+                                        <div class="testimonial-content" style="text-align: left;">
+                                            <div class="testimonial-text"><h2 style="color: white;">Product Name</h2></div>
+                                            <div class="testimonial-author-position" style="text-align: left;">Product description</div>
+                                            <div class="testimonial-author" style="text-align: left;">
+                                                <i class="fa fa-quote-left"></i>  {{ product_info }}
+                                                <i class="fa fa-quote-right"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card p-30">
+                            <div class="media">
+                                <div class="media-left meida media-middle">
+                                    <span><i class="fas fa-spinner f-s-40 color-primary"></i></span>
+                                </div>
+                                <div class="media-body media-text-right">
+                                    <h2>{{pos + neg}}</h2>
+                                    <p class="m-b-0">Total feedback</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card p-30">
+                            <div class="media">
+                                <div class="media-left meida media-middle">
+                                    <span><i class="fas fa-balance-scale f-s-40 color-warning"></i></span>
+                                </div>
+                                <div class="media-body media-text-right">
+                                    <h2>{{ avg }}</h2>
+                                    <p class="m-b-0">Average Review</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card p-30">
+                            <div class="media">
+                                <div class="media-left meida media-middle">
+                                    <span><i class="fas fa-smile f-s-40 color-success"></i></span>
+                                </div>
+                                <div class="media-body media-text-right">
+                                    <h2>{{ pos }}</h2>
+                                    <p class="m-b-0">Positive Reviews</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card p-30">
+                            <div class="media">
+                                <div class="media-left meida media-middle">
+                                    <span><i class="fas fa-frown f-s-40 color-danger"></i></span>
+                                </div>
+                                <div class="media-body media-text-right">
+                                    <h2>{{ neg }}</h2>
+                                    <p class="m-b-0">Negative reviews</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row bg-white m-l-0 m-r-0 box-shadow ">
+
+                    <!-- column -->
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Analysis Chart</h4>
+                                <div id="chartdiv" style="overflow: visible; text-align: left;margin-bottom: -30px;"></div> 
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body browser" style="padding-top: 144px;">
+                                <p class="f-w-600">Negative % <span class="pull-right">{{ neg*100/(pos + neg) }}</span></p>
+                                <div class="progress ">
+                                    <div role="progressbar" style="width: {{ neg*100/(pos + neg) }}%; height:8px;" class="progress-bar bg-danger wow animated progress-animated"> <span class="sr-only">60% Complete</span> </div>
+                                </div>
+
+                                <p class="m-t-30 f-w-600">Positive % <span class="pull-right">{{ pos*100/(pos + neg) }}</span></p>
+                                <div class="progress">
+                                    <div role="progressbar" style="width: {{ pos*100/(pos + neg) }}%; height:8px;" class="progress-bar bg-info wow animated progress-animated"> <span class="sr-only">60% Complete</span> </div>
+                                </div>
+
+                                <p class="m-t-30 f-w-600">Overall<span class="pull-right">{{ avg*20 }}%</span></p>
+                                <div class="progress">
+                                    <div role="progressbar" style="width: {{ avg*20 }}%; height:8px;" class="progress-bar bg-warning wow animated progress-animated"> <span class="sr-only">60% Complete</span> </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- column -->
+                </div>
+
+                <div class="row">
+					<div class="col-lg-12">
+						<div class="row">
+						<div class="col-lg-6">
+							<div class="card">
+								<div class="card-title">
+									<h4>Positive Reviews</h4>
+								</div>
+								<div class="recent-comment">
+                                    {% for posname,positive in pos_name_text %}
+									<div class="media no-border">
+										<div class="media-left">
+											<a href="#"><img alt="..." src="../static/images1/avatar/1.jpg" class="media-object"></a>
+										</div>
+										<div class="media-body">
+											<h4 class="media-heading">{{ posname }}:</h4>
+											<p>{{ positive }}</p>
+										</div>
+									</div>
+                                     {% endfor %}
+								</div>
+							</div>
+							
+						</div>
+                        <div class="col-lg-6">
+                            <div class="card">
+                                <div class="card-title">
+                                    <h4>Negative Reviews</h4>
+                                </div>
+                                <div class="recent-comment">
+                                    {% for negname,negative in neg_name_text %}
+                                    <div class="media no-border">
+                                        <div class="media-left">
+                                            <a href="#"><img alt="..." src="../static/images1/avatar/1.jpg" class="media-object"></a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">{{ negname }}:</h4>
+                                            <p> {{ negative }}</p>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+						</div>
+					</div>
+
+                 <div class="row">
+                    <div class="col-lg-3"></div>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-title">
+                                <h4>Give review to this product:</h4>
+
+                            </div>
+                            <div class="card-body">
+                                <div class="basic-form">
+                                    <form method="POST"  action="{{ url_for('done') }}" >
+                                        <div class="form-group">
+                                            <input type="text" name="u_name" class="form-control input-default " placeholder="Name" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <p>Product ID: {{ asin }}</p>
+                                            <input type="text" name="key" class="form-control input-default" placeholder="Product ID" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="number" min="0" max="5" name="rate" class="form-control input-default" placeholder="Rating in 1-5" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="newcomment" class="form-control input-default" placeholder="Comment" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" value="submit">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="col-lg-6"></div>
+                </div>
+            </div>
+        </div>
+        <!-- End Page wrapper  -->
+    </div>
+    <!-- End Wrapper -->
+    <!-- All Jquery -->
+    <script src="../static/js1/lib/jquery/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="../static/js1/lib/bootstrap/js/popper.min.js"></script>
+    <script src="../static/js1/lib/bootstrap/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="../static/js1/jquery.slimscroll.js"></script>
+    <!--Menu sidebar -->
+    <script src="../static/js1/sidebarmenu.js"></script>
+    <!--stickey kit -->
+    <script src="../static/js1/lib/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <!--Custom JavaScript -->
+
+
+    <!-- Amchart -->
+     <script src="../static/js1/lib/morris-chart/raphael-min.js"></script>
+    <script src="../static/js1/lib/morris-chart/morris.js"></script>
+    <script src="../static/js1/lib/morris-chart/dashboard1-init.js"></script>
+    <script src="../static/js1/lib/owl-carousel/owl.carousel.min.js"></script>
+    <script src="../static/js1/lib/owl-carousel/owl.carousel-init.js"></script>
+    <script src="../static/js1/scripts.js"></script>
+    <script src="../static/js1/custom.min.js"></script>
+
+</body>
+
+</html>

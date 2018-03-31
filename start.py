@@ -14,8 +14,8 @@ def index():
 def analyse():
 	if request.method == 'POST':
 		ASIN = request.form['ASIN']
-		pos, neg, postext, posname, negtext, negname, avg, product_info, plt= product_to_review(ASIN)
-		return render_template('index.html', pos=pos, neg=neg, pos_name_text=zip(posname,postext), neg_name_text=zip(negname,negtext), avg=avg ,product_info=product_info, asin=ASIN)
+		pos, neg, postext, posname, negtext, negname, avg, product_info,product_name, plt= product_to_review(ASIN)
+		return render_template('index.html', pos=pos, neg=neg, pos_name_text=zip(posname,postext), neg_name_text=zip(negname,negtext), avg=avg ,product_info=product_info, product_name=product_name, asin=ASIN)
 
 @app.route('/done', methods=['GET','POST'])
 def done():

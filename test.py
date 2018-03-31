@@ -137,6 +137,7 @@ def product_to_review(ASIN):
 	for i in product_info_reader:
 		if i[0] == ASIN:
 			product_info=i[1]
+			product_name=i[2]
 
 	size=[positive,negative]
 	# plt.rcParams['text.color'] = 'red'
@@ -150,7 +151,7 @@ def product_to_review(ASIN):
 	pie_chart.add('Negative', negative)
 	pie_chart.render_to_file("static/img/p_chart.svg")
 
-	return positive, negative,postext,posname,negtext,negname,average_review,product_info,plt
+	return positive, negative,postext,posname,negtext,negname,average_review,product_info,product_name, plt
 	
 			
 # print ('Enter the sentence')
